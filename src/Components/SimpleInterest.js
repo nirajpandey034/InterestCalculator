@@ -96,7 +96,7 @@ function SimpleInterest() {
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" onClick={() => getInterest()}>
+        <Button variant="contained" onClick={() => getInterest()} style={{textTransform: 'none'}}>
           Get Simple Interest
         </Button>
       </Grid>
