@@ -162,7 +162,7 @@ function SimpleInterest() {
       {result !== null && (
         <Grid item xs={12}>
           <Typography>
-            Your Interest Amount will be : <strong>{result}</strong>
+            Your {parameter} will be : <strong>{result}</strong>
           </Typography>
         </Grid>
       )}

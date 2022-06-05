@@ -160,14 +160,14 @@ function CompoundInterest() {
           onClick={() => getResult()}
           style={{ textTransform: "none" }}
         >
-          Get Compound Interest
+          Get {parameter}
         </Button>
       </Grid>
 
       {result !== null && (
         <Grid item xs={12}>
           <Typography>
-            Your Interest Amount will be : <strong>{result}</strong>
+            Your {parameter} will be : <strong>{result}</strong>
           </Typography>
         </Grid>
       )}
