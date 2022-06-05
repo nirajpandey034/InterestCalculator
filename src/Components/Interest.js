@@ -5,19 +5,19 @@ const getSimpleInterest = (principle, time, roi) => {
   }
 };
 
-const getTime = (principle, interest, roi) => {
+const getSimpleTime = (principle, interest, roi) => {
   if (principle !== "" && interest !== "" && roi !== "") {
     return (interest * 100) / (principle * roi);
   }
 };
 
-const getROI = (principle, interest, time) => {
+const getSimpleROI = (principle, interest, time) => {
   if (principle !== "" && interest !== "" && time !== "") {
     return (interest * 100) / (principle * time);
   }
 };
 
-const getPrinciple = (roi, interest, time) => {
+const getSimplePrinciple = (roi, interest, time) => {
   if (roi !== "" && interest !== "" && time !== "") {
     return (interest * 100) / (roi * time);
   }
@@ -31,4 +31,31 @@ const getCompoundInterest = (principle, time, roi) => {
   }
 };
 
-export { getSimpleInterest, getTime, getROI, getPrinciple, getCompoundInterest };
+const getCompoundTime = (principle, interest, roi) => {
+  if (principle !== "" && interest !== "" && roi !== "") {
+    return (interest * 100) / (principle * roi);
+  }
+};
+
+const getCompoundROI = (principle, interest, time) => {
+  if (principle !== "" && interest !== "" && time !== "") {
+    return (interest * 100) / (principle * time);
+  }
+};
+
+const getCompoundPrinciple = (roi, interest, time) => {
+  if (roi !== "" && interest !== "" && time !== "") {
+    return (interest * 100) / (roi * time);
+  }
+};
+
+export {
+  getSimpleInterest,
+  getSimpleTime,
+  getSimpleROI,
+  getSimplePrinciple,
+  getCompoundInterest,
+  getCompoundTime,
+  getCompoundROI,
+  getCompoundPrinciple,
+};

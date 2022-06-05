@@ -11,7 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 //custom files
-import { getSimpleInterest, getTime, getROI, getPrinciple } from "./Interest";
+import { getSimpleInterest, getSimpleTime, getSimpleROI, getSimplePrinciple } from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
 import { timeList, roiList } from "./Constants";
 
@@ -31,15 +31,15 @@ function SimpleInterest() {
       setResult(result);
     }
     if(parameter === 'principle') {
-      result = getPrinciple(roi, interestAmount, time);
+      result = getSimplePrinciple(roi, interestAmount, time);
       setResult(result);
     }
     if(parameter === 'time') {
-      result = getTime(principle, interestAmount, roi);
+      result = getSimpleTime(principle, interestAmount, roi);
       setResult(result);
     }
     if(parameter === 'interest-rate') {
-      result = getROI(principle, interestAmount, time);
+      result = getSimpleROI(principle, interestAmount, time);
       setResult(result);
     }
   };

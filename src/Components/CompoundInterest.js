@@ -11,26 +11,49 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 //custom files
-import { getCompoundInterest } from "./Interest";
+import {
+  getCompoundInterest,
+  getCompoundTime,
+  getCompoundROI,
+  getCompoundPrinciple,
+} from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
-import {timeList, roiList} from "./Constants";
+import { timeList, roiList } from "./Constants";
 
 function CompoundInterest() {
   const [principle, setPrinciple] = useState(0);
+  const [interestAmount, setInterestAmount] = useState(0);
   const [time, setTime] = useState(0);
   const [roi, setROI] = useState(0);
 
   const [parameter, setParameter] = useState("interest");
-  const [interest, setInterest] = useState(null);
+  const [result, setResult] = useState(null);
 
-
-  const getInterest = () => {
-    let interest = getCompoundInterest(principle, time, roi);
-    setInterest(interest);
+  const getResult = () => {
+    let result = 0;
+    if (parameter === "interest") {
+      result = getCompoundInterest(principle, time, roi);
+      setResult(result);
+    }
+    if (parameter === "principle") {
+      result = getCompoundPrinciple(roi, interestAmount, time);
+      setResult(result);
+    }
+    if (parameter === "time") {
+      result = getCompoundTime(principle, interestAmount, roi);
+      setResult(result);
+    }
+    if (parameter === "interest-rate") {
+      result = getCompoundROI(principle, interestAmount, time);
+      setResult(result);
+    }
   };
 
   const handlePrincipleChange = (event) => {
     setPrinciple(event.target.value);
+  };
+  const handleInterestChange = (event) => {
+    setInterestAmount(event.target.value);
   };
   const handleTimeChange = (event) => {
     setTime(event.target.value);
@@ -57,76 +80,94 @@ function CompoundInterest() {
           setVal={handleParameterTypeChange}
         />
       </Grid>
-      <Grid item xs={4}>
-        <TextField
-          id="outlined-basic"
-          label="Principle"
-          variant="outlined"
-          onChange={(event) => {
-            handlePrincipleChange(event);
-          }}
-        />
-      </Grid>
-      <Grid item xs={4}>
-        <FormControl style={{ minWidth: 220 }}>
-          <InputLabel id="demo-simple-select-label">Time Period</InputLabel>
-          <Select
-            labelId="demo-time-select-label"
-            id="demo-time-select"
-            value={time}
-            label="Time Period"
+      {parameter !== "principle" && (
+        <Grid item xs={4}>
+          <TextField
+            id="outlined-basic"
+            label="Principle"
+            variant="outlined"
             onChange={(event) => {
-              handleTimeChange(event);
+              handlePrincipleChange(event);
             }}
-          >
-            {timeList.map((ele) => {
-              return (
-                <MenuItem key={ele} value={ele}>
-                  {ele}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={4}>
-        <FormControl style={{ minWidth: 220 }}>
-          <InputLabel id="demo-simple-select-label">
-            Rate of interest
-          </InputLabel>
-          <Select
-            labelId="demo-roi-select-label"
-            id="demo-roi-select"
-            value={roi}
-            label="Rate of interest"
+          />
+        </Grid>
+      )}
+      {parameter !== "interest" && (
+        <Grid item xs={4}>
+          <TextField
+            id="outlined-basic"
+            label="Interest Amount"
+            variant="outlined"
             onChange={(event) => {
-              handleROIChange(event);
+              handleInterestChange(event);
             }}
-          >
-            {roiList.map((ele) => {
-              return (
-                <MenuItem key={ele} value={ele}>
-                  {ele}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </Grid>
+          />
+        </Grid>
+      )}
+      {parameter !== "time" && (
+        <Grid item xs={4}>
+          <FormControl style={{ minWidth: 220 }}>
+            <InputLabel id="demo-simple-select-label">Time Period</InputLabel>
+            <Select
+              labelId="demo-time-select-label"
+              id="demo-time-select"
+              value={time}
+              label="Time Period"
+              onChange={(event) => {
+                handleTimeChange(event);
+              }}
+            >
+              {timeList.map((ele) => {
+                return (
+                  <MenuItem key={ele} value={ele}>
+                    {ele}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Grid>
+      )}
+      {parameter !== "interest-rate" && (
+        <Grid item xs={4}>
+          <FormControl style={{ minWidth: 220 }}>
+            <InputLabel id="demo-simple-select-label">
+              Rate of interest
+            </InputLabel>
+            <Select
+              labelId="demo-roi-select-label"
+              id="demo-roi-select"
+              value={roi}
+              label="Rate of interest"
+              onChange={(event) => {
+                handleROIChange(event);
+              }}
+            >
+              {roiList.map((ele) => {
+                return (
+                  <MenuItem key={ele} value={ele}>
+                    {ele}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Grid>
+      )}
       <Grid item xs={12}>
         <Button
           variant="contained"
-          onClick={() => getInterest()}
+          onClick={() => getResult()}
           style={{ textTransform: "none" }}
         >
           Get Compound Interest
         </Button>
       </Grid>
 
-      {interest !== null && (
+      {result !== null && (
         <Grid item xs={12}>
           <Typography>
-            Your Interest Amount will be : <strong>{interest}</strong>
+            Your Interest Amount will be : <strong>{result}</strong>
           </Typography>
         </Grid>
       )}
