@@ -13,16 +13,16 @@ import Select from "@mui/material/Select";
 //custom files
 import { getSimpleInterest } from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
-import {timeList, roiList} from "./Constants";
+import { timeList, roiList } from "./Constants";
 
 function SimpleInterest() {
   const [principle, setPrinciple] = useState(0);
+  const [interestAmount, setInterestAmount] = useState(0);
   const [time, setTime] = useState(0);
   const [roi, setROI] = useState(0);
 
   const [parameter, setParameter] = useState("interest");
   const [interest, setInterest] = useState(null);
-
 
   const getInterest = () => {
     let interest = getSimpleInterest(principle, time, roi);
@@ -31,6 +31,9 @@ function SimpleInterest() {
 
   const handlePrincipleChange = (event) => {
     setPrinciple(event.target.value);
+  };
+  const handleInterestChange = (event) => {
+    setInterestAmount(event.target.value);
   };
   const handleTimeChange = (event) => {
     setTime(event.target.value);
@@ -56,69 +59,88 @@ function SimpleInterest() {
           setVal={handleParameterTypeChange}
         />
       </Grid>
-      <Grid item xs={4}>
-        <TextField
-          id="outlined-basic"
-          label="Principle"
-          variant="outlined"
-          onChange={(event) => {
-            handlePrincipleChange(event);
-          }}
-        />
-      </Grid>
-      <Grid item xs={4}>
-        <FormControl style={{ minWidth: 220 }}>
-          <InputLabel id="demo-simple-select-label">Time Period</InputLabel>
-          <Select
-            labelId="demo-time-select-label"
-            id="demo-time-select"
-            value={time}
-            label="Time Period"
+      {parameter !== "principle" && (
+        <Grid item xs={4}>
+          <TextField
+            id="outlined-basic"
+            label="Principle"
+            variant="outlined"
             onChange={(event) => {
-              handleTimeChange(event);
+              handlePrincipleChange(event);
             }}
-          >
-            {timeList.map((ele) => {
-              return (
-                <MenuItem key={ele} value={ele}>
-                  {ele}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={4}>
-        <FormControl style={{ minWidth: 220 }}>
-          <InputLabel id="demo-simple-select-label">
-            Rate of interest
-          </InputLabel>
-          <Select
-            labelId="demo-roi-select-label"
-            id="demo-roi-select"
-            value={roi}
-            label="Rate of interest"
+          />
+        </Grid>
+      )}
+      {parameter !== "interest" && (
+        <Grid item xs={4}>
+          <TextField
+            id="outlined-basic"
+            label="Interest Amount"
+            variant="outlined"
             onChange={(event) => {
-              handleROIChange(event);
+              handleInterestChange(event);
             }}
-          >
-            {roiList.map((ele) => {
-              return (
-                <MenuItem key={ele} value={ele}>
-                  {ele}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </Grid>
+          />
+        </Grid>
+      )}
+      {parameter !== "time" && (
+        <Grid item xs={4}>
+          <FormControl style={{ minWidth: 220 }}>
+            <InputLabel id="demo-simple-select-label">Time Period</InputLabel>
+            <Select
+              labelId="demo-time-select-label"
+              id="demo-time-select"
+              value={time}
+              label="Time Period"
+              onChange={(event) => {
+                handleTimeChange(event);
+              }}
+            >
+              {timeList.map((ele) => {
+                return (
+                  <MenuItem key={ele} value={ele}>
+                    {ele}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Grid>
+      )}
+      {parameter !== "interest-rate" && (
+        <Grid item xs={4}>
+          <FormControl style={{ minWidth: 220 }}>
+            <InputLabel id="demo-simple-select-label">
+              Rate of interest
+            </InputLabel>
+            <Select
+              labelId="demo-roi-select-label"
+              id="demo-roi-select"
+              value={roi}
+              label="Rate of interest"
+              onChange={(event) => {
+                handleROIChange(event);
+              }}
+            >
+              {roiList.map((ele) => {
+                return (
+                  <MenuItem key={ele} value={ele}>
+                    {ele}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Grid>
+      )}
+
       <Grid item xs={12}>
         <Button
           variant="contained"
           onClick={() => getInterest()}
           style={{ textTransform: "none" }}
         >
-          Get Simple Interest
+          Get {parameter}
         </Button>
       </Grid>
 

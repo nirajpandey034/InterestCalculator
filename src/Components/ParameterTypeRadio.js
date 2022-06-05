@@ -12,7 +12,7 @@ function InterestTypeRadio(props) {
       <RadioGroup
         row
         aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="simple"
+        defaultValue="interest-rate"
         name="radio-buttons-group"
         value={props.val}
         onChange={(e) => props.setVal(e.target.value)}
