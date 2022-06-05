@@ -3,9 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height:100vh;
+  height: 100vh;
 }
 
+@media screen and (max-width: 500px) {
+  .MuiFormGroup-root {
+    justify-content: space-around;
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
