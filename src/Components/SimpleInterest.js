@@ -11,7 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 //custom files
-import { getSimpleInterest } from "./Interest";
+import { getSimpleInterest, getTime, getROI, getPrinciple } from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
 import { timeList, roiList } from "./Constants";
 
@@ -22,11 +22,26 @@ function SimpleInterest() {
   const [roi, setROI] = useState(0);
 
   const [parameter, setParameter] = useState("interest");
-  const [interest, setInterest] = useState(null);
+  const [result, setResult] = useState(null);
 
-  const getInterest = () => {
-    let interest = getSimpleInterest(principle, time, roi);
-    setInterest(interest);
+  const getResult = () => {
+    let result = 0;
+    if(parameter === 'interest') {
+      result = getSimpleInterest(principle, time, roi);
+      setResult(result);
+    }
+    if(parameter === 'principle') {
+      result = getPrinciple(roi, interestAmount, time);
+      setResult(result);
+    }
+    if(parameter === 'time') {
+      result = getTime(principle, interestAmount, roi);
+      setResult(result);
+    }
+    if(parameter === 'interest-rate') {
+      result = getROI(principle, interestAmount, time);
+      setResult(result);
+    }
   };
 
   const handlePrincipleChange = (event) => {
@@ -137,17 +152,17 @@ function SimpleInterest() {
       <Grid item xs={12}>
         <Button
           variant="contained"
-          onClick={() => getInterest()}
+          onClick={() => getResult()}
           style={{ textTransform: "none" }}
         >
           Get {parameter}
         </Button>
       </Grid>
 
-      {interest !== null && (
+      {result !== null && (
         <Grid item xs={12}>
           <Typography>
-            Your Interest Amount will be : <strong>{interest}</strong>
+            Your Interest Amount will be : <strong>{result}</strong>
           </Typography>
         </Grid>
       )}
