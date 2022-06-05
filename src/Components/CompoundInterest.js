@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import Grid from "@mui/material/Grid";
 
+//mui files
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+//custom files
 import { getCompoundInterest } from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
 import {timeList, roiList} from "./Constants";
