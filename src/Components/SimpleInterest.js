@@ -13,6 +13,7 @@ import Select from "@mui/material/Select";
 import { getSimpleInterest } from "./Interest";
 
 import ParameterTypeRadio from "./ParameterTypeRadio";
+import {timeList, roiList} from "./Constants";
 
 function SimpleInterest() {
   const [principle, setPrinciple] = useState(0);
@@ -20,15 +21,9 @@ function SimpleInterest() {
   const [roi, setROI] = useState(0);
 
   const [parameter, setParameter] = useState("interest");
-
-  const timeList = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
-  const roiList = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
-
   const [interest, setInterest] = useState(null);
+
+
   const getInterest = () => {
     let interest = getSimpleInterest(principle, time, roi);
     setInterest(interest);

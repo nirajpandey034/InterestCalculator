@@ -7,8 +7,7 @@ import FormLabel from "@mui/material/FormLabel";
 
 function InterestTypeRadio(props) {
   return (
-    <FormControl
-    >
+    <FormControl>
       <FormLabel id="demo-radio-buttons-group-label">I want to get</FormLabel>
       <RadioGroup
         row
@@ -17,13 +16,6 @@ function InterestTypeRadio(props) {
         name="radio-buttons-group"
         value={props.val}
         onChange={(e) => props.setVal(e.target.value)}
-        style={{
-            "@media (maxWidth: 500px)": {
-              width: "min-content",
-              justify: "space-around"
-            },
-          }}
-        
       >
         <FormControlLabel
           value="principle"

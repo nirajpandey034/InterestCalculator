@@ -11,20 +11,18 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 import { getCompoundInterest } from "./Interest";
+import ParameterTypeRadio from "./ParameterTypeRadio";
+import {timeList, roiList} from "./Constants";
 
 function CompoundInterest() {
   const [principle, setPrinciple] = useState(0);
   const [time, setTime] = useState(0);
   const [roi, setROI] = useState(0);
 
-  const timeList = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
-  const roiList = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
-
+  const [parameter, setParameter] = useState("interest");
   const [interest, setInterest] = useState(null);
+
+
   const getInterest = () => {
     let interest = getCompoundInterest(principle, time, roi);
     setInterest(interest);
@@ -40,6 +38,10 @@ function CompoundInterest() {
     setROI(event.target.value);
   };
 
+  const handleParameterTypeChange = (type) => {
+    setParameter(type);
+  };
+
   return (
     <Grid
       container
@@ -48,6 +50,12 @@ function CompoundInterest() {
       alignItems="center"
       justify="center"
     >
+      <Grid item xs={12}>
+        <ParameterTypeRadio
+          val={parameter}
+          setVal={handleParameterTypeChange}
+        />
+      </Grid>
       <Grid item xs={4}>
         <TextField
           id="outlined-basic"
@@ -71,7 +79,11 @@ function CompoundInterest() {
             }}
           >
             {timeList.map((ele) => {
-              return <MenuItem key={ele} value={ele}>{ele}</MenuItem>;
+              return (
+                <MenuItem key={ele} value={ele}>
+                  {ele}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>
@@ -91,13 +103,21 @@ function CompoundInterest() {
             }}
           >
             {roiList.map((ele) => {
-              return <MenuItem key={ele} value={ele}>{ele}</MenuItem>;
+              return (
+                <MenuItem key={ele} value={ele}>
+                  {ele}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" onClick={() => getInterest()} style={{textTransform: 'none'}}>
+        <Button
+          variant="contained"
+          onClick={() => getInterest()}
+          style={{ textTransform: "none" }}
+        >
           Get Compound Interest
         </Button>
       </Grid>
