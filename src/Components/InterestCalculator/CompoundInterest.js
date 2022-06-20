@@ -11,11 +11,16 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 //custom files
-import { getSimpleInterest, getSimpleTime, getSimpleROI, getSimplePrinciple } from "./Interest";
+import {
+  getCompoundInterest,
+  getCompoundTime,
+  getCompoundROI,
+  getCompoundPrinciple,
+} from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
-import { timeList, roiList } from "./Constants";
+import { timeList, roiList } from "../Constants";
 
-function SimpleInterest() {
+function CompoundInterest() {
   const [principle, setPrinciple] = useState(0);
   const [interestAmount, setInterestAmount] = useState(0);
   const [time, setTime] = useState(0);
@@ -26,20 +31,20 @@ function SimpleInterest() {
 
   const getResult = () => {
     let result = 0;
-    if(parameter === 'interest') {
-      result = getSimpleInterest(principle, time, roi);
+    if (parameter === "interest") {
+      result = getCompoundInterest(principle, time, roi);
       setResult(result);
     }
-    if(parameter === 'principle') {
-      result = getSimplePrinciple(roi, interestAmount, time);
+    if (parameter === "principle") {
+      result = getCompoundPrinciple(roi, interestAmount, time);
       setResult(result);
     }
-    if(parameter === 'time') {
-      result = getSimpleTime(principle, interestAmount, roi);
+    if (parameter === "time") {
+      result = getCompoundTime(principle, interestAmount, roi);
       setResult(result);
     }
-    if(parameter === 'interest-rate') {
-      result = getSimpleROI(principle, interestAmount, time);
+    if (parameter === "interest-rate") {
+      result = getCompoundROI(principle, interestAmount, time);
       setResult(result);
     }
   };
@@ -60,6 +65,7 @@ function SimpleInterest() {
   const handleParameterTypeChange = (type) => {
     setParameter(type);
   };
+
   return (
     <Grid
       container
@@ -148,7 +154,6 @@ function SimpleInterest() {
           </FormControl>
         </Grid>
       )}
-
       <Grid item xs={12}>
         <Button
           variant="contained"
@@ -170,4 +175,4 @@ function SimpleInterest() {
   );
 }
 
-export default SimpleInterest;
+export default CompoundInterest;

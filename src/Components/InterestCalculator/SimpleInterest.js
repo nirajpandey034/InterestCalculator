@@ -12,15 +12,15 @@ import Select from "@mui/material/Select";
 
 //custom files
 import {
-  getCompoundInterest,
-  getCompoundTime,
-  getCompoundROI,
-  getCompoundPrinciple,
+  getSimpleInterest,
+  getSimpleTime,
+  getSimpleROI,
+  getSimplePrinciple,
 } from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
-import { timeList, roiList } from "./Constants";
+import { timeList, roiList } from "../Constants";
 
-function CompoundInterest() {
+function SimpleInterest() {
   const [principle, setPrinciple] = useState(0);
   const [interestAmount, setInterestAmount] = useState(0);
   const [time, setTime] = useState(0);
@@ -32,19 +32,19 @@ function CompoundInterest() {
   const getResult = () => {
     let result = 0;
     if (parameter === "interest") {
-      result = getCompoundInterest(principle, time, roi);
+      result = getSimpleInterest(principle, time, roi);
       setResult(result);
     }
     if (parameter === "principle") {
-      result = getCompoundPrinciple(roi, interestAmount, time);
+      result = getSimplePrinciple(roi, interestAmount, time);
       setResult(result);
     }
     if (parameter === "time") {
-      result = getCompoundTime(principle, interestAmount, roi);
+      result = getSimpleTime(principle, interestAmount, roi);
       setResult(result);
     }
     if (parameter === "interest-rate") {
-      result = getCompoundROI(principle, interestAmount, time);
+      result = getSimpleROI(principle, interestAmount, time);
       setResult(result);
     }
   };
@@ -65,7 +65,6 @@ function CompoundInterest() {
   const handleParameterTypeChange = (type) => {
     setParameter(type);
   };
-
   return (
     <Grid
       container
@@ -89,6 +88,7 @@ function CompoundInterest() {
             onChange={(event) => {
               handlePrincipleChange(event);
             }}
+            inputProps={{ inputmode: "numeric", pattern: "[0-9]*" }}
           />
         </Grid>
       )}
@@ -154,6 +154,7 @@ function CompoundInterest() {
           </FormControl>
         </Grid>
       )}
+
       <Grid item xs={12}>
         <Button
           variant="contained"
@@ -175,4 +176,4 @@ function CompoundInterest() {
   );
 }
 
-export default CompoundInterest;
+export default SimpleInterest;

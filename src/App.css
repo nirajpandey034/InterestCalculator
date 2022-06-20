@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
 }
 
@@ -10,6 +11,10 @@
   .MuiFormGroup-root {
     justify-content: space-around;
   }
+}
+.MuiToolbar-root {
+  width: 90vw;
+
 }
 .App-logo {
   height: 40vmin;
