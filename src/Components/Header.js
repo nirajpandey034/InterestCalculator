@@ -10,7 +10,7 @@ import {useNavigate} from 'react-router-dom';
 function Header() {
   const navigate = useNavigate();
   return (
-    <Box sx={{ flexGrow: 1 }} style={{marginBottom: '8rem'}}>
+    <Box sx={{ flexGrow: 1 }} style={{marginBottom: '8rem', marginLeft: '1rem', marginRight: '1rem'}}>
       <AppBar position="static">
         <Toolbar>
           <div
