@@ -17,7 +17,7 @@ function Header() {
             style={{ display: "flex", flexDirection: "row", width: "inherit" }}
           >
             <div style={{ marginRight: "auto" }}>
-              <CalculateIcon fontSize="large" style={{cursor: "pointer"}} onClick={()=>{navigate('/')}}/>
+              <CalculateIcon fontSize="large" style={{cursor: "pointer", marginTop:'7px'}} onClick={()=>{navigate('/')}}/>
             </div>
 
             <div style={{ marginLeft: "auto" }}>
