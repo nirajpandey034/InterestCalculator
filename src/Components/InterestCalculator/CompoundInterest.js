@@ -142,7 +142,6 @@ function CompoundInterest() {
             onChange={(event) => {
               handlePrincipleChange(event);
             }}
-            inputProps={{ inputmode: "numeric", pattern: "[0-9]*" }}
           />
         </Grid>
       )}
@@ -156,7 +155,6 @@ function CompoundInterest() {
             onChange={(event) => {
               handleInterestChange(event);
             }}
-            inputProps={{ inputmode: "numeric", pattern: "[0-9]*" }}
           />
         </Grid>
       )}
