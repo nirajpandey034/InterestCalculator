@@ -6,9 +6,6 @@ function Welcome() {
   return (
     <div>
       <div>Welcome to our tool world.</div>
-      {/* <button style={{cursor:'pointer'}} onClick={() => navigate("interest-calculator")}>
-        Let's Calculate Interests
-      </button> */}
     </div>
   );
 }
