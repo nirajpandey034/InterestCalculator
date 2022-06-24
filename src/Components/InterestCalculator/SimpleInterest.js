@@ -86,6 +86,7 @@ function SimpleInterest() {
 
   const handleParameterTypeChange = (type) => {
     setParameter(type);
+    //resetting values
     setPrinciple("");
     setInterestAmount("");
     setTime(0);
@@ -130,6 +131,7 @@ function SimpleInterest() {
             onChange={(event) => {
               handleInterestChange(event);
             }}
+            inputProps={{ inputmode: "numeric", pattern: "[0-9]*" }}
           />
         </Grid>
       )}
