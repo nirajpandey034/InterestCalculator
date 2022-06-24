@@ -4,29 +4,28 @@ import { Grid, Container, TextField, Button, Typography } from "@mui/material";
 
 import emailjs from "@emailjs/browser";
 
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function RequestTool() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [mailSentStatus, setMailSentStatus] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (title.length === 0 || description.length === 0)
-      setIsButtonDisabled(true);
-    else setIsButtonDisabled(false);
+    if (title !== "" && description !== "") setIsButtonDisabled(false);
+    else if(title === "" || description === "") setIsButtonDisabled(true)
   }, [title, description]);
 
   const handleTitleChange = (e) => {
     let title = e.target.value;
-    if (title) setTitle(title);
+    setTitle(title);
   };
   const handleDescriptionChange = (e) => {
     let description = e.target.value;
-    if (description) setDescription(description);
+    setDescription(description);
   };
 
   const submitRequest = () => {
@@ -45,7 +44,9 @@ function RequestTool() {
         .then(
           (result) => {
             setMailSentStatus(true);
-            setTimeout(() =>{navigate('/')}, 3000);
+            setTimeout(() => {
+              navigate("/");
+            }, 3000);
           },
           (error) => {
             setMailSentStatus(false);
@@ -97,10 +98,13 @@ function RequestTool() {
               ? [
                   mailSentStatus === true ? (
                     <Typography variant="body1">
-                      Request Sent Successfully, Redirecting to home in 3 Seconds..
+                      Request Sent Successfully, Redirecting to home in 3
+                      Seconds..
                     </Typography>
                   ) : (
-                    <Typography variant="body1">Request Failed, Please Try Again</Typography>
+                    <Typography variant="body1">
+                      Request Failed, Please Try Again
+                    </Typography>
                   ),
                 ]
               : null}
