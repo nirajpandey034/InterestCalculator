@@ -3,7 +3,7 @@ import { CFooter, CLink } from "@coreui/react";
 
 function Footer() {
   return (
-    <CFooter style={{position: 'absolute', bottom: 0}}>
+    <CFooter style={{position: 'relative', bottom: 0}}>
       <div>
         <CLink href="https://kasamoke.com" target="_blank">Kasamoke</CLink>
         <span>&copy; 2018 kasamoke</span>

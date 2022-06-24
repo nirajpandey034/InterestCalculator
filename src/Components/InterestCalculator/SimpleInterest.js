@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //mui files
 import Grid from "@mui/material/Grid";
@@ -21,13 +21,35 @@ import ParameterTypeRadio from "./ParameterTypeRadio";
 import { timeList, roiList } from "../Constants";
 
 function SimpleInterest() {
-  const [principle, setPrinciple] = useState(0);
-  const [interestAmount, setInterestAmount] = useState(0);
+  const [principle, setPrinciple] = useState("");
+  const [interestAmount, setInterestAmount] = useState("");
   const [time, setTime] = useState(0);
   const [roi, setROI] = useState(0);
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
   const [parameter, setParameter] = useState("interest");
   const [result, setResult] = useState(null);
+
+  useEffect(() => {
+    if (parameter === "interest") {
+      if (principle !== "" && time !== 0 && roi !== 0) {
+        setIsButtonDisabled(false);
+      } else setIsButtonDisabled(true);
+    } else if (parameter === "principle") {
+      if (interestAmount !== "" && time !== 0 && roi !== 0)
+        setIsButtonDisabled(false);
+      else setIsButtonDisabled(true);
+    } else if (parameter === "time") {
+      if (principle !== "" && interestAmount !== "" && roi !== 0)
+        setIsButtonDisabled(false);
+      else setIsButtonDisabled(true);
+    } else if (parameter === "interest-rate") {
+      if (principle !== "" && time !== 0 && interestAmount !== "")
+        setIsButtonDisabled(false);
+      else setIsButtonDisabled(true);
+    } else setIsButtonDisabled(true);
+  }, [principle, interestAmount, time, roi, parameter]);
 
   const getResult = () => {
     let result = 0;
@@ -64,6 +86,11 @@ function SimpleInterest() {
 
   const handleParameterTypeChange = (type) => {
     setParameter(type);
+    setPrinciple("");
+    setInterestAmount("");
+    setTime(0);
+    setROI(0);
+    setIsButtonDisabled(true);
   };
   return (
     <Grid
@@ -82,9 +109,10 @@ function SimpleInterest() {
       {parameter !== "principle" && (
         <Grid item xs={4}>
           <TextField
-            id="outlined-basic"
+            id="principle"
             label="Principle"
             variant="outlined"
+            value={principle}
             onChange={(event) => {
               handlePrincipleChange(event);
             }}
@@ -95,9 +123,10 @@ function SimpleInterest() {
       {parameter !== "interest" && (
         <Grid item xs={4}>
           <TextField
-            id="outlined-basic"
+            id="interestAmount"
             label="Interest Amount"
             variant="outlined"
+            value={interestAmount}
             onChange={(event) => {
               handleInterestChange(event);
             }}
@@ -110,7 +139,7 @@ function SimpleInterest() {
             <InputLabel id="demo-simple-select-label">Time Period</InputLabel>
             <Select
               labelId="demo-time-select-label"
-              id="demo-time-select"
+              id="time"
               value={time}
               label="Time Period"
               onChange={(event) => {
@@ -136,7 +165,7 @@ function SimpleInterest() {
             </InputLabel>
             <Select
               labelId="demo-roi-select-label"
-              id="demo-roi-select"
+              id="roi"
               value={roi}
               label="Rate of interest"
               onChange={(event) => {
@@ -157,6 +186,7 @@ function SimpleInterest() {
 
       <Grid item xs={12}>
         <Button
+          disabled={isButtonDisabled}
           variant="contained"
           onClick={() => getResult()}
           style={{ textTransform: "none" }}
