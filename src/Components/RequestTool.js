@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-import { Grid, Container, TextField, Button } from "@mui/material";
+import { Grid, Container, TextField, Button, Typography } from "@mui/material";
 
 import emailjs from "@emailjs/browser";
+
+import {useNavigate} from 'react-router-dom';
 
 function RequestTool() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [mailSentStatus, setMailSentStatus] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (title.length === 0 || description.length === 0)
@@ -39,10 +44,11 @@ function RequestTool() {
         )
         .then(
           (result) => {
-            console.log(result.text);
+            setMailSentStatus(true);
+            setTimeout(() =>{navigate('/')}, 3000);
           },
           (error) => {
-            console.log(error.text);
+            setMailSentStatus(false);
           }
         );
     }
@@ -85,6 +91,19 @@ function RequestTool() {
             >
               Submit Request
             </Button>
+          </Grid>
+          <Grid item xs={12}>
+            {mailSentStatus !== null
+              ? [
+                  mailSentStatus === true ? (
+                    <Typography variant="body1">
+                      Request Sent Successfully, Redirecting to home in 3 Seconds..
+                    </Typography>
+                  ) : (
+                    <Typography variant="body1">Request Failed, Please Try Again</Typography>
+                  ),
+                ]
+              : null}
           </Grid>
         </Grid>
       </Container>
