@@ -23,7 +23,7 @@ function Header() {
             <div style={{ marginLeft: "auto" }}>
               <div style={{ display: "flex", flexDirection: "row"}}>
               <MenuBar />
-              <Button color="inherit" style={{textTransform: "none"}}>Request</Button>
+              <Button color="inherit" style={{textTransform: "none"}} onClick={()=>{navigate('request-tool')}}>Request</Button>
               </div>
             </div>
           </div>
