@@ -19,7 +19,7 @@ import {
 } from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
 import { timeList, roiList } from "../Constants";
-import { AmountFormatChecker } from "./Utilities";
+import { AmountFormatChecker } from "../Utilities";
 
 function CompoundInterest() {
   const [principle, setPrinciple] = useState("");
