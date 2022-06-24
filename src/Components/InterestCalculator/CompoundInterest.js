@@ -92,6 +92,7 @@ function CompoundInterest() {
     setTime(0);
     setROI(0);
     setIsButtonDisabled(true);
+    setResult(null);
   };
 
   return (
