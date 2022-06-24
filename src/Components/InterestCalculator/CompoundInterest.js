@@ -19,6 +19,7 @@ import {
 } from "./Interest";
 import ParameterTypeRadio from "./ParameterTypeRadio";
 import { timeList, roiList } from "../Constants";
+import { AmountFormatChecker } from "./Utilities";
 
 function CompoundInterest() {
   const [principle, setPrinciple] = useState("");
@@ -33,19 +34,41 @@ function CompoundInterest() {
 
   useEffect(() => {
     if (parameter === "interest") {
-      if (principle !== "" && time !== 0 && roi !== 0) {
+      if (
+        principle !== "" &&
+        AmountFormatChecker(principle) &&
+        time !== 0 &&
+        roi !== 0
+      ) {
         setIsButtonDisabled(false);
       } else setIsButtonDisabled(true);
     } else if (parameter === "principle") {
-      if (interestAmount !== "" && time !== 0 && roi !== 0)
+      if (
+        interestAmount !== "" &&
+        AmountFormatChecker(interestAmount) &&
+        time !== 0 &&
+        roi !== 0
+      )
         setIsButtonDisabled(false);
       else setIsButtonDisabled(true);
     } else if (parameter === "time") {
-      if (principle !== "" && interestAmount !== "" && roi !== 0)
+      if (
+        principle !== "" &&
+        AmountFormatChecker(principle) &&
+        interestAmount !== "" &&
+        AmountFormatChecker(interestAmount) &&
+        roi !== 0
+      )
         setIsButtonDisabled(false);
       else setIsButtonDisabled(true);
     } else if (parameter === "interest-rate") {
-      if (principle !== "" && time !== 0 && interestAmount !== "")
+      if (
+        principle !== "" &&
+        AmountFormatChecker(principle) &&
+        time !== 0 &&
+        interestAmount !== "" &&
+        AmountFormatChecker(interestAmount)
+      )
         setIsButtonDisabled(false);
       else setIsButtonDisabled(true);
     } else setIsButtonDisabled(true);
@@ -189,7 +212,7 @@ function CompoundInterest() {
       )}
       <Grid item xs={12}>
         <Button
-        disabled={isButtonDisabled}
+          disabled={isButtonDisabled}
           variant="contained"
           onClick={() => getResult()}
           style={{ textTransform: "none" }}
