@@ -13,6 +13,8 @@ import emailjs from "@emailjs/browser";
 
 import { useNavigate } from "react-router-dom";
 
+import Timer from "./Timer";
+
 function RequestTool() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -113,8 +115,7 @@ function RequestTool() {
               ? [
                   mailSentStatus === true ? (
                     <Typography variant="body1">
-                      Request Sent Successfully, Redirecting to home in 3
-                      Seconds..
+                      Request Sent Successfully, {<Timer time={3}/>}
                     </Typography>
                   ) : (
                     <Typography variant="body1">
