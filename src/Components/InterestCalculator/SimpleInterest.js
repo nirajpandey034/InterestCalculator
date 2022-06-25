@@ -9,6 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 //custom files
 import {
@@ -138,6 +139,11 @@ function SimpleInterest() {
             label="Principle"
             variant="outlined"
             value={principle}
+            InputProps={{
+              startAdornment: (
+                <CurrencyRupeeIcon position="start" />
+              )
+            }}
             onChange={(event) => {
               handlePrincipleChange(event);
             }}
@@ -151,6 +157,11 @@ function SimpleInterest() {
             label="Interest Amount"
             variant="outlined"
             value={interestAmount}
+            InputProps={{
+              startAdornment: (
+                <CurrencyRupeeIcon position="start" />
+              )
+            }}
             onChange={(event) => {
               handleInterestChange(event);
             }}

@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import { Grid, Container, TextField, Button, Typography } from "@mui/material";
+import {
+  Grid,
+  Container,
+  TextField,
+  Button,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 
 import emailjs from "@emailjs/browser";
 
@@ -12,11 +19,13 @@ function RequestTool() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [mailSentStatus, setMailSentStatus] = useState(null);
 
+  const [showLoader, setShowLoader] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (title !== "" && description !== "") setIsButtonDisabled(false);
-    else if(title === "" || description === "") setIsButtonDisabled(true)
+    else if (title === "" || description === "") setIsButtonDisabled(true);
   }, [title, description]);
 
   const handleTitleChange = (e) => {
@@ -29,6 +38,7 @@ function RequestTool() {
   };
 
   const submitRequest = () => {
+    setShowLoader(true);
     const service_id = process.env.REACT_APP_SERVICE_ID;
     const template_id = process.env.REACT_APP_TEMPLATE_ID;
     const public_key = process.env.REACT_APP_PUBLIC_KEY;
@@ -43,12 +53,14 @@ function RequestTool() {
         )
         .then(
           (result) => {
+            setShowLoader(false);
             setMailSentStatus(true);
             setTimeout(() => {
               navigate("/");
             }, 3000);
           },
           (error) => {
+            setShowLoader(false);
             setMailSentStatus(false);
           }
         );
@@ -92,6 +104,9 @@ function RequestTool() {
             >
               Submit Request
             </Button>
+          </Grid>
+          <Grid item xs={12}>
+            {showLoader && <CircularProgress />}
           </Grid>
           <Grid item xs={12}>
             {mailSentStatus !== null
