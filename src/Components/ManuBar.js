@@ -2,6 +2,7 @@ import React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import { useNavigate  } from "react-router-dom";
 
@@ -50,7 +51,7 @@ function ManuBar() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={()=>{handleClose();navigate('interest-calculator');}}>Interest Calculator</MenuItem>
+        <MenuItem onClick={()=>{handleClose();navigate('interest-calculator');}}><Typography>Interest Calculator</Typography></MenuItem>
       </Menu>
     </div>
   );

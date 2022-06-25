@@ -96,7 +96,7 @@ function RequestTool() {
           </Grid>
           <Grid item xs={12}>
             <Button
-              variant="outlined"
+              variant="contained"
               disabled={isButtonDisabled}
               sx={{
                 width: { xs: "80vw", sm: "60vw", md: "20rem" },

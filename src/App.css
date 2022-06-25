@@ -13,6 +13,10 @@
   }
 }
 
+.MuiSwitch-root {
+  margin-top: 7px;
+}
+
 @media screen and (max-width: 800px) {
   .footer {
     display: none;
