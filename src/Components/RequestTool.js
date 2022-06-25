@@ -75,8 +75,12 @@ function RequestTool() {
           <Grid item xs={12}>
             <TextField
               id="title"
+              label="Title"
               variant="outlined"
-              placeholder="Title for the tool"
+              value={title}
+              InputLabelProps={{
+                shrink: true,
+              }}
               sx={{ width: { xs: "90vw", sm: "70vw", md: "25rem" } }}
               onChange={(e) => handleTitleChange(e)}
             />
@@ -85,9 +89,13 @@ function RequestTool() {
             <TextField
               id="description"
               multiline
-              placeholder="Description of the tool"
+              label="Description"
+              variant="outlined"
+              value={description}
               rows={5}
-              variant="filled"
+              InputLabelProps={{
+                shrink: true,
+              }}
               sx={{
                 width: { xs: "90vw", sm: "70vw", md: "25rem" },
               }}
